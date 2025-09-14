@@ -13,9 +13,15 @@
  * @returns number the sum of the numbers from 1 to destination
  */
 export function sumOfNumbersTo(destination) {
-    console.log(destination)
-    // write your code here
-    return 0
+  console.log(destination);
+
+  let sum = 0;
+  // Loop from 1 to destination (inclusive)
+  for (let i = 1; i <= destination; i++) {
+    sum += i; // Add each number to the sum
+  }
+
+  return sum;
 }
 
 /**
@@ -27,19 +33,27 @@ export function sumOfNumbersTo(destination) {
  * @returns the object containing count, sum, arrayOfEvenNumbers from 1 to destination
  */
 export function evenNumbersWithin(destination) {
-    console.log(destination)
-    // get the number from 0 to destination
-    const sum = 0
-    const count = 0
-    const arrayOfEvenNumbers = []
+  console.log(destination);
+  // get the number from 0 to destination
+  let sum = 0;
+  let count = 0;
+  const arrayOfEvenNumbers = [];
 
-    // write your code here
-
-    return {
-        count,
-        sum,
-        arrayOfEvenNumbers,
+  // Loop from 0 to destination (inclusive)
+  for (let i = 0; i <= destination; i++) {
+    // Check if the number is even
+    if (i % 2 === 0) {
+      count++;
+      sum += i;
+      arrayOfEvenNumbers.push(i);
     }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfEvenNumbers,
+  };
 }
 
 /**
@@ -56,12 +70,18 @@ export function evenNumbersWithin(destination) {
  * @returns Array the converted temperatures in Fahrenheit
  */
 export function celsiusToFahrenheit(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const result = []
+  console.log(arrayOfNumbers);
+  const result = [];
 
-    // write your code here
+  // Loop through each Celsius temperature
+  for (let i = 0; i < arrayOfNumbers.length; i++) {
+    // Convert using formula: F = (C × 9/5) + 32
+    const fahrenheit = (arrayOfNumbers[i] * 9) / 5 + 32;
+    // Remove decimals using Math.trunc as specified
+    result.push(Math.trunc(fahrenheit));
+  }
 
-    return result
+  return result;
 }
 
 /**
@@ -74,19 +94,27 @@ export function celsiusToFahrenheit(arrayOfNumbers) {
  * @returns {object} the count, sum, and arrayOfOddNumbers
  */
 export function oddNumbersWithin(destination) {
-    console.log(destination)
-    // get the number from 0 to destination
-    const sum = 0
-    const count = 0
-    const arrayOfOddNumbers = []
+  console.log(destination);
+  // get the number from 0 to destination
+  let sum = 0;
+  let count = 0;
+  const arrayOfOddNumbers = [];
 
-    // write your code here
-
-    return {
-        count,
-        sum,
-        arrayOfOddNumbers,
+  // Loop from 0 to destination (inclusive)
+  for (let i = 0; i <= destination; i++) {
+    // Check if the number is odd
+    if (i % 2 !== 0) {
+      count++;
+      sum += i;
+      arrayOfOddNumbers.push(i);
     }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfOddNumbers,
+  };
 }
 
 /**
@@ -100,18 +128,26 @@ export function oddNumbersWithin(destination) {
  * @returns {object} the count, sum, and arrayOfMultiples
  */
 export function findMultiples(arrayOfNumbers, factor) {
-    console.log(arrayOfNumbers, factor)
-    const sum = 0
-    const count = 0
-    const arrayOfMultiples = []
+  console.log(arrayOfNumbers, factor);
+  let sum = 0;
+  let count = 0;
+  const arrayOfMultiples = [];
 
-    // write your code here
-
-    return {
-        count,
-        sum,
-        arrayOfMultiples,
+  // Loop through each number in the array
+  for (let i = 0; i < arrayOfNumbers.length; i++) {
+    // Check if the number is a multiple of the factor
+    if (arrayOfNumbers[i] % factor === 0) {
+      count++;
+      sum += arrayOfNumbers[i];
+      arrayOfMultiples.push(arrayOfNumbers[i]);
     }
+  }
+
+  return {
+    count,
+    sum,
+    arrayOfMultiples,
+  };
 }
 
 /**
@@ -126,12 +162,29 @@ export function findMultiples(arrayOfNumbers, factor) {
  * @returns {Array} the array of factorial results
  */
 export function calculateFactorials(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const result = []
+  console.log(arrayOfNumbers);
+  const result = [];
 
-    // write your code here
+  // Loop through each number in the array
+  for (let i = 0; i < arrayOfNumbers.length; i++) {
+    const num = arrayOfNumbers[i];
 
-    return result
+    // Handle special cases
+    if (num < 0) {
+      result.push(0); // Negative numbers return 0
+    } else if (num === 0) {
+      result.push(1); // 0! = 1
+    } else {
+      // Calculate factorial for positive numbers
+      let factorial = 1;
+      for (let j = 1; j <= num; j++) {
+        factorial *= j;
+      }
+      result.push(factorial);
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -145,18 +198,40 @@ export function calculateFactorials(arrayOfNumbers) {
  * @returns {object} the count, sum, and arrayOfPrimes
  */
 export function findPrimeNumbers(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const sum = 0
-    const count = 0
-    const arrayOfPrimes = []
+    console.log(arrayOfNumbers);
+    let sum = 0;
+    let count = 0;
+    const arrayOfPrimes = [];
 
-    // write your code here
+    // Helper function to check if a number is prime
+    function isPrime(num) {
+        // Prime numbers must be greater than 1
+        if (num <= 1) return false;
+        if (num === 2) return true; // 2 is prime
+        if (num % 2 === 0) return false; // Even numbers > 2 are not prime
+        
+        // Check for odd divisors up to square root
+        for (let i = 3; i <= Math.sqrt(num); i += 2) {
+            if (num % i === 0) return false;
+        }
+        return true;
+    }
+
+    // Check each number in the array
+    for (let i = 0; i < arrayOfNumbers.length; i++) {
+        const num = arrayOfNumbers[i];
+        if (isPrime(num)) {
+            count++;
+            sum += num;
+            arrayOfPrimes.push(num);
+        }
+    }
 
     return {
         count,
         sum,
         arrayOfPrimes,
-    }
+    };
 }
 
 /**
@@ -168,12 +243,16 @@ export function findPrimeNumbers(arrayOfNumbers) {
  * @returns {Array} the array of doubled numbers
  */
 export function doubleTheValues(arrayOfNumbers) {
-    console.log(arrayOfNumbers)
-    const result = []
+  console.log(arrayOfNumbers);
+  const result = [];
 
-    // write your code here
+  // Loop through each number in the array
+  for (let i = 0; i < arrayOfNumbers.length; i++) {
+    // Double the current number and add to result array
+    result.push(arrayOfNumbers[i] * 2);
+  }
 
-    return result
+  return result;
 }
 
 // ========================
